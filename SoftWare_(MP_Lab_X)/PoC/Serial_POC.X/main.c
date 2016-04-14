@@ -7,6 +7,7 @@
 
 #include "p32xxxx.h"
 #include "types.h"
+#include <stdio.h>
 
 void    Serial_begin(u16 speed)
 {
@@ -17,7 +18,7 @@ void    Serial_begin(u16 speed)
     U1MODEbits.RXINV = 0;   // Idle state is 1
     U1STAbits.URXEN = 1;    // Enable control of ur pin
     U1STAbits.UTXEN = 1;    // Enable control of ut pin
-    U1BRG = ((12000000 / (16 * 9600)) - 1);
+    U1BRG = ((12000000 / (16 * speed)) - 1);
     U1MODEbits.ON = 1;      // Enable uart
 }
 
@@ -28,9 +29,28 @@ void    Serial_putchar(u8 ch)
     U1TXREG = ch;
 }
 
+void    Serial_putstr(char *str)
+{
+    u32 i = 0;
+    while (str[i])
+    {
+        Serial_putchar(str[i]);
+        i++;
+    }
+}
+
 void    main(void)
 {
-    Serial_begin (9600);
+    char str[1000];
+    Serial_begin (38400);
     while (1)
-        Serial_putchar('a');
+    {
+        Serial_putstr("42 c'est fort\n");
+        Serial_putstr("paris\n");
+        u32 i = 0;
+        while (i < 500000)
+        {
+            i++;
+        }
+    }
 }
