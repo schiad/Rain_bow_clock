@@ -5,68 +5,78 @@
  * Created on March 24, 2016, 4:31 PM
  */
 
+/*
+ * D0 - D7  -> RB0 - RB7
+ * RS       -> RD0
+ * E        -> RD1
+ * RW       -> GND
+*/
 #include "p32xxxx.h"
 #include "types.h"
-#include <stdio.h>
+#include "lcd.h"
 
-void __attribute__((__interrupt__, auto_psv)) _U1RXInterrupt(void)
+u8 _displayfunction;
+u8 _displaycontrol;
+u8 _displaymode;
+
+void    LCD_pin_reset()
 {
-
-    Serial_putchar(U1RXREG);
-    IFS0bits.U1RXIF = 0;        // clear rx interrupt flag
+    LATB    &= 0b1111111100000000;
+    TRISB   &= 0b1111111100000000;
+    LATD    &= 0b1111111111111100;
+    TRISD   &= 0b1111111111111100;
 }
 
-void    Serial_begin(u16 speed)
+void    LCD_pulseE()
 {
-    U1MODEbits.ON = 0;      // disable uart
-    IFS0bits.U1RXIF = 0;        // clear rx interrupt flag
-    //IFS0bits.U1TXIF = 0;        // clear tx interrupt flag
-
-    IEC0bits.U1RXIE = 1;        // enable Rx interrupts
-    //IEC0bits.U1TXIE = 1;        // enable tx interrupts
-
-    U1MODEbits.STSEL = 0;   // 1 stop bit
-    U1MODEbits.PDSEL = 0;   // 8 bits data no parity
-    U1MODEbits.BRGH = 0;    // 16x baud clock enable
-    U1MODEbits.RXINV = 0;   // Idle state is 1
-    U1STAbits.URXEN = 1;    // Enable control of ur pin
-    U1STAbits.UTXEN = 1;    // Enable control of ut pin
-    U1BRG = ((12000000 / (16 * speed)) - 1);
-    U1MODEbits.ON = 1;      // Enable uart
+    TRISDbits.TRISD1 = 0;
+    //delaimicros(1);
+    TRISDbits.TRISD1 = 1;
+    //delaimicros(1);
+    TRISDbits.TRISD1 = 0;
+    //delaimicros(100);
 }
 
-void    Serial_putchar(u8 ch)
+void    LCD_send(u8 value, u8 mode)
 {
-    while (U1STAbits.UTXBF)
-        ;
-    U1TXREG = ch;
+    LCD_pin_reset();
+    TRISDbits.TRISD0     = mode & 0b01;
+    TRISB               |= value;
+    LCD_pulseE();
 }
 
-void    Serial_putstr(char *str)
+void    LCD_display()
 {
-    u32 i = 0;
-    while (str[i])
-    {
-        Serial_putchar(str[i]);
-        i++;
-    }
+    LCD_send(LCD_DISPLAYCONTROL | _displaycontrol, 1);
+}
+
+void    LCD_clear()
+{
+    LCD_display(LCD_CLEARDISPLAY);
+    //delaymicros(2000);
+}
+
+void    LCD_begin()
+{
+    LCD_pin_reset();
+    LCD_clear();
+    _displayfunction |= LCD_2LINE;
+    LCD_send(LCD_FUNCTIONSET | _displayfunction, 1);
+    // delaymicros(4500);
+    LCD_send(LCD_FUNCTIONSET | _displayfunction, 1);
+    // delaymicros(150);
+    LCD_send(LCD_FUNCTIONSET | _displayfunction, 1);
+    LCD_send(LCD_FUNCTIONSET | _displayfunction, 1);
+    _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
+    LCD_display();
+    LCD_clear();
+    _displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
+    LCD_send(LCD_ENTRYMODESET | _displaymode, 0);
 }
 
 void    main(void)
 {
-    char str[1000];
-    Serial_begin (38400);
-    while (1)
-    {
-        Serial_putstr("42 c'est fort\n");
-        Serial_putstr("paris\n");
-        u32 i = 0;
-        while (1)
-        {
-            if (U1STAbits.URXDA)
-            {
-                Serial_putchar(U1RXREG);
-            }
-        }
-    }
+TRISFbits.TRISF1 = 0;
+    TRISDbits.TRISD8 = 1;
+    LATFbits.LATF1 = 1;
 }
