@@ -5,8 +5,8 @@
 
 // DEVCFG2
 #pragma config FPLLIDIV = DIV_2        // PLL Input Divider (12x Divider)
-#pragma config FPLLMUL = MUL_24         // PLL Multiplier (24x Multiplier)
-#pragma config FPLLODIV = DIV_1       // System PLL Output Clock Divider (PLL Divide by 256)
+#pragma config FPLLMUL = MUL_16         // PLL Multiplier (24x Multiplier)
+#pragma config FPLLODIV = DIV_8       // System PLL Output Clock Divider (PLL Divide by 256)
 
 // DEVCFG1
 #pragma config FNOSC = FRCPLL           // Oscillator Selection Bits (Primary Osc w/PLL (XT+,HS+,EC+PLL))
@@ -25,4 +25,3 @@
 #pragma config PWP = OFF                // Program Flash Write Protect (Disable)
 #pragma config BWP = OFF                // Boot Flash Write Protect bit (Protection Disabled)
 #pragma config CP = OFF                 // Code Protect (Protection Disabled)
-
