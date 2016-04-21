@@ -9,13 +9,6 @@
 #include "types.h"
 #include <stdio.h>
 
-void __attribute__((__interrupt__, auto_psv)) _U1RXInterrupt(void)
-{
-
-    Serial_putchar(U1RXREG);
-    IFS0bits.U1RXIF = 0;        // clear rx interrupt flag
-}
-
 void    Serial_begin(u16 speed)
 {
     U1MODEbits.ON = 0;      // disable uart
@@ -42,7 +35,7 @@ void    Serial_putchar(u8 ch)
     U1TXREG = ch;
 }
 
-void    Serial_putstr(char *str)
+void    Serial_putstr(u8 *str)
 {
     u32 i = 0;
     while (str[i])
@@ -52,9 +45,48 @@ void    Serial_putstr(char *str)
     }
 }
 
+u8      Serial_available()
+{
+    return (U1STAbits.URXDA);
+}
+
+u8      Serial_get_char()
+{
+    if (Serial_available())
+        return (U1RXREG);
+    return ('\0');
+}
+
+void    Serial_get_str(u8 *str)
+{
+    u8  i = 0;
+    while (i < 100)
+    {
+        delay_micros(500);
+        if (Serial_available())
+            str[i] = Serial_get_char();
+        else
+            str[i] = '\0';
+        if (str[i] == '#')
+            i = 0;
+        else
+            i++;
+    }
+    str[i] = '\0';
+    return (str);
+}
+
+void    delay_micros(u32 ms)
+{
+        while (ms)
+    {
+        ms--;
+    }
+}
+
 void    main(void)
 {
-    char str[1000];
+    char str[101];
     Serial_begin (38400);
     while (1)
     {
@@ -63,10 +95,14 @@ void    main(void)
         u32 i = 0;
         while (1)
         {
-            if (U1STAbits.URXDA)
+            while (Serial_available())
             {
-                Serial_putchar(U1RXREG);
+                Serial_get_str(str);
+                Serial_putchar('\n');
+                Serial_putchar('>');
+                Serial_putstr(str);
             }
+
         }
     }
 }

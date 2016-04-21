@@ -7,8 +7,9 @@
 
 /*
  * Dx   -> RBx
- * RS   -> RD0
+ * RS   -> RD2 RD0
  * E    -> RD1
+ * LED+ -> RD0
  * RW   -> GND
 */
 
@@ -18,6 +19,8 @@
 #include <plib.h>
 #include <stdio.h>
 
+#define PERIODE 4000
+
 u8 _displayfunction = 0;
 u8 _displaycontrol = 0;
 u8 _displaymode = 0;
@@ -25,6 +28,11 @@ u8 _curcol = 0;
 u8 _currow = 0;
 u8 _numrow = 0;
 u8 _numcol = 0;
+
+void    LCD_Light(u8 mode)
+{
+    LATDbits.LATD0 = mode;
+}
 
 void    delay_micros(u32 ms)
 {
@@ -38,8 +46,8 @@ void    LCD_pin_reset()
 {
     LATB    &= 0b1111111100000000;
     TRISB   &= 0b1111111100000000;
-    LATD    &= 0b1111111111111100;
-    TRISD   &= 0b1111111111111100;
+    LATD    &= 0b1111111111111001;
+    TRISD   &= 0b1111111111111000;
 }
 
 void    LCD_command(u8 com)
@@ -143,7 +151,7 @@ int     LCD_putstrPos(u8 *str, u8 col, u8 row)
 void    LCD_send(u8 value, u8 mode)
 {
     LCD_pin_reset();
-    LATDbits.LATD0     = mode;
+    LATDbits.LATD2     = mode;
     LATB               |= value;
     LCD_pulseE();
 }
@@ -172,14 +180,8 @@ void    LCD_begin(u8 col, u8 row)
     LCD_pin_reset();
     delay_micros(50000);
     _displayfunction |= LCD_2LINE;
-    //_numlines = 2;
-    //_currline = 0;
     LCD_send(LCD_FUNCTIONSET | _displayfunction, 0);
     delay_micros(4500);
-//    LCD_send(LCD_FUNCTIONSET | _displayfunction, 0);
-//    delay_micros(150);
-//    LCD_send(LCD_FUNCTIONSET | _displayfunction, 0);
-//    LCD_send(LCD_FUNCTIONSET | _displayfunction, 0);
     _displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
     LCD_display();
     LCD_clear();
@@ -192,15 +194,13 @@ void    main(void)
 {
     u32 counter;
     char tmp[100];
+    u8 light = 1;
 
     SYSTEMConfigPerformance(8000000);
-    TRISFbits.TRISF1 = 0;
-    TRISDbits.TRISD8 = 1;
-    LATFbits.LATF1 = 0;
+    
     LCD_begin(16, 2);
     LCD_setCursor(4, 0);
     LCD_putstrPos("42 en force", 0, 0);
-//    LCD_clear();
     while (1)
     {
         asm volatile (         "\n"
@@ -209,9 +209,11 @@ void    main(void)
         :    "=m" (counter)
         :
         );
-        delay_micros(1000000);
+        delay_micros(100000);
         sprintf(tmp, "%16d", counter);
         LCD_putstrPos(tmp, 0, 1);
+        LCD_Light(1);
+//        light = ~light;
     }
     LCD_cursor();
 }
