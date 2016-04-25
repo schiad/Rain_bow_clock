@@ -8,6 +8,25 @@
 #include "p32xxxx.h"
 #include "types.h"
 #include <stdio.h>
+#include <plib.h>
+#include <xc.h>
+
+void    delay_micros(u32 ns)
+{
+    while (ns)
+    {
+        ns--;
+    }
+}
+
+void    delay_millis(u32 ms)
+{
+    while (ms)
+    {
+        delay_micros(1000);
+        ms--;
+    }
+}
 
 void    Serial_begin(u16 speed)
 {
@@ -73,36 +92,46 @@ void    Serial_get_str(u8 *str)
             i++;
     }
     str[i] = '\0';
-    return (str);
 }
 
-void    delay_micros(u32 ms)
+void    ADC_config()
 {
-        while (ms)
-    {
-        ms--;
-    }
+    AD1PCFGbits.PCFG0 = 0;  // set RB0 as analog
+    AD1CON1 = 0x0000;       // initialise register
+    AD1CHSbits.CH0SA = 0;   // read from RB0/AN0
+    AD1CSSL = 0;
+    AD1CON3 = 2;
+    AD1CON2 = 0;
+    AD1CON1bits.ON = 1;
+}
+
+u32    ADC_read()
+{
+    AD1CON1bits.SAMP = 1;
+    delay_millis(100);
+    AD1CON1bits.SAMP = 0;
+    while (!AD1CON1bits.DONE)
+        ;
+    return (ADC1BUF0);
 }
 
 void    main(void)
 {
     char str[101];
-    Serial_begin (38400);
+    Serial_begin (9600);
+    Serial_putstr("init");
+    ADC_config();
+    u32 analog;
     while (1)
     {
-        Serial_putstr("42 c'est fort\n");
+        Serial_putstr("42\n");
         Serial_putstr("paris\n");
         u32 i = 0;
         while (1)
         {
-            while (Serial_available())
-            {
-                Serial_get_str(str);
-                Serial_putchar('\n');
-                Serial_putchar('>');
-                Serial_putstr(str);
-            }
-
+            analog = ADC_read();
+            sprintf(str, "%u\n", analog);
+            Serial_putstr(str);
         }
-    }
+     }
 }
