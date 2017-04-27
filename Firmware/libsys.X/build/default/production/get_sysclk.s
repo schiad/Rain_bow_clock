@@ -1,14 +1,9 @@
 	.section .mdebug.abi32
 	.previous
 	.gnu_attribute 4, 3
-	.section	.debug_abbrev,info
-.Ldebug_abbrev0:
-	.section	.debug_info,info
-.Ldebug_info0:
-	.section	.debug_line,info
-.Ldebug_line0:
 	.section	.text,code
 .Ltext0:
+	.cfi_sections	.debug_frame
 	.section	.sbss,bss
 	.align	2
 	.type	_f_cpu, @object
@@ -57,8 +52,9 @@ _pllmult:
 	.align	2
 	.globl	libsys_get_sysclk
 .LFB2 = .
-	.file 1 "c:/users/bocal/desktop/rainbowclock/firmware/libsys.x/get_sysclk.c"
+	.file 1 "c:/users/bocal/desktop/rainbowclockv3/firmware/libsys.x/get_sysclk.c"
 	.loc 1 9 0
+	.cfi_startproc
 	.set	nomips16
 	.set	nomicromips
 	.ent	libsys_get_sysclk
@@ -71,11 +67,13 @@ libsys_get_sysclk:
 	.set	nomacro
 # End mchp_output_function_prologue
 	addiu	$sp,$sp,-16
-.LCFI0:
+.LCFI0 = .
+	.cfi_def_cfa_offset 16
 	sw	$fp,12($sp)
-.LCFI1:
+	.cfi_offset 30, -4
 	move	$fp,$sp
-.LCFI2:
+.LCFI1 = .
+	.cfi_def_cfa_register 30
 	.loc 1 12 0
 	lw	$2,%gp_rel(_f_cpu)($28)
 	beq	$2,$0,.L2
@@ -101,8 +99,8 @@ libsys_get_sysclk:
 	nop
 
 	sll	$3,$2,2
-	lui	$2,%hi(.L9)
-	addiu	$2,$2,%lo(.L9)
+	lui	$2,%hi(.L6)
+	addiu	$2,$2,%lo(.L6)
 	addu	$2,$3,$2
 	lw	$2,0($2)
 	j	$2
@@ -110,16 +108,16 @@ libsys_get_sysclk:
 
 	.align	2
 	.align	2
-.L9:
-	.word	.L4
-	.word	.L6
-	.word	.L4
-	.word	.L6
-	.word	.L4
+.L6:
 	.word	.L4
 	.word	.L7
+	.word	.L4
+	.word	.L7
+	.word	.L4
+	.word	.L4
 	.word	.L8
-.L6:
+	.word	.L9
+.L7:
 	.loc 1 18 0
 	lui	$2,%hi(DEVCFG2)
 	lw	$2,%lo(DEVCFG2)($2)
@@ -132,7 +130,7 @@ libsys_get_sysclk:
 	lw	$3,0($fp)
 	divu	$0,$3,$2
 	teq	$2,$0,7
-	mfhi	$3
+	mfhi	$2
 	mflo	$2
 	sw	$2,0($fp)
 	.loc 1 19 0
@@ -146,7 +144,8 @@ libsys_get_sysclk:
 	addu	$2,$3,$2
 	lw	$2,0($2)
 	lw	$3,0($fp)
-	mul	$2,$3,$2
+	mult	$3,$2
+	mflo	$2
 	sw	$2,0($fp)
 	.loc 1 20 0
 	lui	$2,%hi(DEVCFG2)
@@ -161,14 +160,14 @@ libsys_get_sysclk:
 	lw	$3,0($fp)
 	divu	$0,$3,$2
 	teq	$2,$0,7
-	mfhi	$3
+	mfhi	$2
 	mflo	$2
 	sw	$2,0($fp)
 	.loc 1 21 0
 	j	.L4
 	nop
 
-.L8:
+.L9:
 	.loc 1 23 0
 	lui	$2,%hi(OSCCON)
 	lw	$2,%lo(OSCCON)($2)
@@ -182,14 +181,14 @@ libsys_get_sysclk:
 	lw	$3,0($fp)
 	divu	$0,$3,$2
 	teq	$2,$0,7
-	mfhi	$3
+	mfhi	$2
 	mflo	$2
 	sw	$2,0($fp)
 	.loc 1 24 0
 	j	.L4
 	nop
 
-.L7:
+.L8:
 	.loc 1 26 0
 	lw	$2,0($fp)
 	srl	$2,$2,4
@@ -204,6 +203,8 @@ libsys_get_sysclk:
 .L3:
 	.loc 1 33 0
 	move	$sp,$fp
+.LCFI2 = .
+	.cfi_def_cfa_register 29
 	lw	$fp,12($sp)
 	addiu	$sp,$sp,16
 	j	$31
@@ -214,57 +215,23 @@ libsys_get_sysclk:
 # Begin mchp_output_function_epilogue
 # End mchp_output_function_epilogue
 	.end	libsys_get_sysclk
+	.cfi_endproc
 .LFE2:
 	.size	libsys_get_sysclk, .-libsys_get_sysclk
-	.section	.debug_frame,info
-.Lframe0:
-	.4byte	.LECIE0-.LSCIE0
-.LSCIE0:
-	.4byte	0xffffffff
-	.byte	0x1
-	.ascii	"\000"
-	.uleb128 0x1
-	.sleb128 -4
-	.byte	0x1f
-	.byte	0xc
-	.uleb128 0x1d
-	.uleb128 0x0
-	.align	2
-.LECIE0:
-.LSFDE0:
-	.4byte	.LEFDE0-.LASFDE0
-.LASFDE0:
-	.4byte	.Lframe0
-	.4byte	.LFB2
-	.4byte	.LFE2-.LFB2
-	.byte	0x4
-	.4byte	.LCFI0-.LFB2
-	.byte	0xe
-	.uleb128 0x10
-	.byte	0x4
-	.4byte	.LCFI1-.LCFI0
-	.byte	0x9e
-	.uleb128 0x1
-	.byte	0x4
-	.4byte	.LCFI2-.LCFI1
-	.byte	0xd
-	.uleb128 0x1e
-	.align	2
-.LEFDE0:
-	.section	.text,code
 .Letext0:
-	.file 2 "c:/program files (x86)/microchip/xc32/v1.34/pic32mx/include/proc/p32mx170f256d.h"
-	.file 3 "c:/program files (x86)/microchip/xc32/v1.34/pic32mx/include/machine/int_types.h"
+	.file 2 "c:/program files (x86)/microchip/xc32/v1.40/pic32mx/include/proc/p32mx170f256d.h"
+	.file 3 "c:/program files (x86)/microchip/xc32/v1.40/pic32mx/include/machine/int_types.h"
 	.section	.debug_info,info
-	.4byte	0x578
+.Ldebug_info0:
+	.4byte	0x54c
 	.2byte	0x2
 	.4byte	.Ldebug_abbrev0
 	.byte	0x4
 	.uleb128 0x1
-	.ascii	"GNU C 4.5.2 MPLAB XC32 Compiler v1.34\000"
+	.ascii	"GNU C 4.8.3 MPLAB XC32 Compiler v1.40\000"
 	.byte	0x1
 	.ascii	"get_sysclk.c\000"
-	.ascii	"C:/Users/bocal/Desktop/RainbowClock/Firmware/libsys.X\000"
+	.ascii	"C:/Users/bocal/Desktop/RainbowClockV3/Firmware/libsys.X\000"
 	.4byte	.Ltext0
 	.4byte	.Letext0
 	.4byte	.Ldebug_line0
@@ -276,411 +243,411 @@ libsys_get_sysclk:
 	.byte	0x4
 	.byte	0x2
 	.2byte	0x876
-	.4byte	0x1e5
+	.4byte	0x1e7
 	.uleb128 0x4
 	.ascii	"OSWEN\000"
 	.byte	0x2
 	.2byte	0x877
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1f
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"SOSCEN\000"
 	.byte	0x2
 	.2byte	0x878
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1e
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"UFRCEN\000"
 	.byte	0x2
 	.2byte	0x879
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1d
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"CF\000"
 	.byte	0x2
 	.2byte	0x87a
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1c
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"SLPEN\000"
 	.byte	0x2
 	.2byte	0x87b
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1b
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"SLOCK\000"
 	.byte	0x2
 	.2byte	0x87c
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1a
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"ULOCK\000"
 	.byte	0x2
 	.2byte	0x87d
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x19
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"CLKLOCK\000"
 	.byte	0x2
 	.2byte	0x87e
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x18
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"NOSC\000"
 	.byte	0x2
 	.2byte	0x87f
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x3
 	.byte	0x15
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"COSC\000"
 	.byte	0x2
 	.2byte	0x881
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x3
 	.byte	0x11
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PLLMULT\000"
 	.byte	0x2
 	.2byte	0x883
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x3
 	.byte	0xd
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PBDIV\000"
 	.byte	0x2
 	.2byte	0x884
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x2
 	.byte	0xb
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PBDIVRDY\000"
 	.byte	0x2
 	.2byte	0x885
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0xa
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"SOSCRDY\000"
 	.byte	0x2
 	.2byte	0x886
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x9
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"FRCDIV\000"
 	.byte	0x2
 	.2byte	0x888
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x3
 	.byte	0x5
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PLLODIV\000"
 	.byte	0x2
 	.2byte	0x889
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x3
 	.byte	0x2
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
-	.byte	0x0
+	.uleb128 0
+	.byte	0
 	.uleb128 0x3
 	.byte	0x4
 	.byte	0x2
 	.2byte	0x88b
-	.4byte	0x35d
+	.4byte	0x35f
 	.uleb128 0x4
 	.ascii	"NOSC0\000"
 	.byte	0x2
 	.2byte	0x88d
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x17
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"NOSC1\000"
 	.byte	0x2
 	.2byte	0x88e
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x16
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"NOSC2\000"
 	.byte	0x2
 	.2byte	0x88f
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x15
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"COSC0\000"
 	.byte	0x2
 	.2byte	0x891
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x13
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"COSC1\000"
 	.byte	0x2
 	.2byte	0x892
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x12
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"COSC2\000"
 	.byte	0x2
 	.2byte	0x893
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x11
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PLLMULT0\000"
 	.byte	0x2
 	.2byte	0x895
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0xf
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PLLMULT1\000"
 	.byte	0x2
 	.2byte	0x896
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0xe
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PLLMULT2\000"
 	.byte	0x2
 	.2byte	0x897
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0xd
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PBDIV0\000"
 	.byte	0x2
 	.2byte	0x898
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0xc
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PBDIV1\000"
 	.byte	0x2
 	.2byte	0x899
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0xb
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"FRCDIV0\000"
 	.byte	0x2
 	.2byte	0x89b
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x7
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"FRCDIV1\000"
 	.byte	0x2
 	.2byte	0x89c
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x6
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"FRCDIV2\000"
 	.byte	0x2
 	.2byte	0x89d
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x5
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PLLODIV0\000"
 	.byte	0x2
 	.2byte	0x89e
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x4
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PLLODIV1\000"
 	.byte	0x2
 	.2byte	0x89f
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x3
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
+	.uleb128 0
 	.uleb128 0x4
 	.ascii	"PLLODIV2\000"
 	.byte	0x2
 	.2byte	0x8a0
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x1
 	.byte	0x2
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
-	.byte	0x0
+	.uleb128 0
+	.byte	0
 	.uleb128 0x3
 	.byte	0x4
 	.byte	0x2
 	.2byte	0x8a2
-	.4byte	0x377
+	.4byte	0x379
 	.uleb128 0x4
 	.ascii	"w\000"
 	.byte	0x2
 	.2byte	0x8a3
-	.4byte	0x82
+	.4byte	0x84
 	.byte	0x4
 	.byte	0x20
-	.byte	0x0
+	.byte	0
 	.byte	0x2
 	.byte	0x23
-	.uleb128 0x0
-	.byte	0x0
+	.uleb128 0
+	.byte	0
 	.uleb128 0x5
 	.byte	0x4
 	.byte	0x2
 	.2byte	0x875
-	.4byte	0x390
+	.4byte	0x392
 	.uleb128 0x6
-	.4byte	0x92
+	.4byte	0x94
 	.uleb128 0x6
-	.4byte	0x1e5
+	.4byte	0x1e7
 	.uleb128 0x6
-	.4byte	0x35d
-	.byte	0x0
+	.4byte	0x35f
+	.byte	0
 	.uleb128 0x7
 	.ascii	"__OSCCONbits_t\000"
 	.byte	0x2
 	.2byte	0x8a5
-	.4byte	0x377
+	.4byte	0x379
 	.uleb128 0x2
 	.byte	0x4
 	.byte	0x7
@@ -706,6 +673,10 @@ libsys_get_sysclk:
 	.byte	0x5
 	.ascii	"short int\000"
 	.uleb128 0x2
+	.byte	0x4
+	.byte	0x7
+	.ascii	"sizetype\000"
+	.uleb128 0x2
 	.byte	0x1
 	.byte	0x6
 	.ascii	"signed char\000"
@@ -717,7 +688,7 @@ libsys_get_sysclk:
 	.ascii	"__uint32_t\000"
 	.byte	0x3
 	.byte	0x33
-	.4byte	0x82
+	.4byte	0x84
 	.uleb128 0x2
 	.byte	0x8
 	.byte	0x5
@@ -732,118 +703,91 @@ libsys_get_sysclk:
 	.byte	0x1
 	.byte	0x8
 	.byte	0x1
-	.4byte	0x41a
+	.4byte	0x428
 	.4byte	.LFB2
 	.4byte	.LFE2
 	.byte	0x1
 	.byte	0x6e
-	.4byte	0x490
+	.byte	0x1
+	.4byte	0x49f
 	.uleb128 0xa
 	.ascii	"freq\000"
 	.byte	0x1
 	.byte	0xa
-	.4byte	0x41a
+	.4byte	0x428
 	.byte	0x2
 	.byte	0x91
 	.sleb128 0
-	.byte	0x0
-	.uleb128 0xb
-	.ascii	"OSCCON\000"
-	.byte	0x2
-	.2byte	0x874
-	.4byte	0x4a1
-	.byte	0x1
-	.byte	0x1
-	.uleb128 0xc
-	.4byte	0x82
-	.uleb128 0xd
-	.4byte	.LASF1
-	.byte	0x2
-	.2byte	0x8a6
-	.ascii	"*OSCCON\000"
-	.4byte	0x4bc
-	.byte	0x1
-	.byte	0x1
-	.uleb128 0xc
-	.4byte	0x390
-	.uleb128 0xb
-	.ascii	"DEVCFG2\000"
-	.byte	0x2
-	.2byte	0x137b
-	.4byte	0x4a1
-	.byte	0x1
-	.byte	0x1
+	.byte	0
 	.uleb128 0xa
 	.ascii	"_f_cpu\000"
 	.byte	0x1
 	.byte	0x3
-	.4byte	0x41a
+	.4byte	0x428
 	.byte	0x5
 	.byte	0x3
 	.4byte	_f_cpu
-	.uleb128 0xe
-	.4byte	0x41a
-	.4byte	0x4f7
-	.uleb128 0xf
-	.4byte	0x3a7
+	.uleb128 0xb
+	.4byte	0x428
+	.4byte	0x4c3
+	.uleb128 0xc
+	.4byte	0x3fc
 	.byte	0x7
-	.byte	0x0
+	.byte	0
 	.uleb128 0xa
 	.ascii	"_pllidiv\000"
 	.byte	0x1
 	.byte	0x4
-	.4byte	0x4e7
+	.4byte	0x4b3
 	.byte	0x5
 	.byte	0x3
 	.4byte	_pllidiv
-	.uleb128 0x10
-	.4byte	.LASF0
-	.byte	0x1
-	.byte	0x5
-	.4byte	0x4e7
-	.byte	0x1
-	.byte	0x1
 	.uleb128 0xa
 	.ascii	"_pllmult\000"
 	.byte	0x1
 	.byte	0x6
-	.4byte	0x4e7
+	.4byte	0x4b3
 	.byte	0x5
 	.byte	0x3
 	.4byte	_pllmult
-	.uleb128 0xb
+	.uleb128 0xd
 	.ascii	"OSCCON\000"
 	.byte	0x2
 	.2byte	0x874
-	.4byte	0x4a1
+	.4byte	0x500
 	.byte	0x1
 	.byte	0x1
-	.uleb128 0xd
-	.4byte	.LASF1
+	.uleb128 0xe
+	.4byte	0x84
+	.uleb128 0xf
+	.ascii	"OSCCONbits\000"
 	.byte	0x2
 	.2byte	0x8a6
-	.ascii	"*OSCCON\000"
-	.4byte	0x4bc
+	.ascii	"OSCCON\000"
+	.4byte	0x521
 	.byte	0x1
 	.byte	0x1
-	.uleb128 0xb
+	.uleb128 0xe
+	.4byte	0x392
+	.uleb128 0xd
 	.ascii	"DEVCFG2\000"
 	.byte	0x2
 	.2byte	0x137b
-	.4byte	0x4a1
+	.4byte	0x500
 	.byte	0x1
 	.byte	0x1
-	.uleb128 0x11
-	.4byte	.LASF0
+	.uleb128 0x10
+	.ascii	"_pllodiv\000"
 	.byte	0x1
 	.byte	0x5
-	.4byte	0x4e7
+	.4byte	0x4b3
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
 	.4byte	_pllodiv
-	.byte	0x0
+	.byte	0
 	.section	.debug_abbrev,info
+.Ldebug_abbrev0:
 	.uleb128 0x1
 	.uleb128 0x11
 	.byte	0x1
@@ -861,19 +805,19 @@ libsys_get_sysclk:
 	.uleb128 0x1
 	.uleb128 0x10
 	.uleb128 0x6
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x2
 	.uleb128 0x24
-	.byte	0x0
+	.byte	0
 	.uleb128 0xb
 	.uleb128 0xb
 	.uleb128 0x3e
 	.uleb128 0xb
 	.uleb128 0x3
 	.uleb128 0x8
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x3
 	.uleb128 0x13
 	.byte	0x1
@@ -885,11 +829,11 @@ libsys_get_sysclk:
 	.uleb128 0x5
 	.uleb128 0x1
 	.uleb128 0x13
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x4
 	.uleb128 0xd
-	.byte	0x0
+	.byte	0
 	.uleb128 0x3
 	.uleb128 0x8
 	.uleb128 0x3a
@@ -906,8 +850,8 @@ libsys_get_sysclk:
 	.uleb128 0xb
 	.uleb128 0x38
 	.uleb128 0xa
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x5
 	.uleb128 0x17
 	.byte	0x1
@@ -919,18 +863,18 @@ libsys_get_sysclk:
 	.uleb128 0x5
 	.uleb128 0x1
 	.uleb128 0x13
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x6
 	.uleb128 0xd
-	.byte	0x0
+	.byte	0
 	.uleb128 0x49
 	.uleb128 0x13
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x7
 	.uleb128 0x16
-	.byte	0x0
+	.byte	0
 	.uleb128 0x3
 	.uleb128 0x8
 	.uleb128 0x3a
@@ -939,11 +883,11 @@ libsys_get_sysclk:
 	.uleb128 0x5
 	.uleb128 0x49
 	.uleb128 0x13
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x8
 	.uleb128 0x16
-	.byte	0x0
+	.byte	0
 	.uleb128 0x3
 	.uleb128 0x8
 	.uleb128 0x3a
@@ -952,8 +896,8 @@ libsys_get_sysclk:
 	.uleb128 0xb
 	.uleb128 0x49
 	.uleb128 0x13
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x9
 	.uleb128 0x2e
 	.byte	0x1
@@ -975,13 +919,15 @@ libsys_get_sysclk:
 	.uleb128 0x1
 	.uleb128 0x40
 	.uleb128 0xa
+	.uleb128 0x2117
+	.uleb128 0xc
 	.uleb128 0x1
 	.uleb128 0x13
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0xa
 	.uleb128 0x34
-	.byte	0x0
+	.byte	0
 	.uleb128 0x3
 	.uleb128 0x8
 	.uleb128 0x3a
@@ -992,11 +938,29 @@ libsys_get_sysclk:
 	.uleb128 0x13
 	.uleb128 0x2
 	.uleb128 0xa
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0xb
+	.uleb128 0x1
+	.byte	0x1
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x1
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0xc
+	.uleb128 0x21
+	.byte	0
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x2f
+	.uleb128 0xb
+	.byte	0
+	.byte	0
+	.uleb128 0xd
 	.uleb128 0x34
-	.byte	0x0
+	.byte	0
 	.uleb128 0x3
 	.uleb128 0x8
 	.uleb128 0x3a
@@ -1009,20 +973,20 @@ libsys_get_sysclk:
 	.uleb128 0xc
 	.uleb128 0x3c
 	.uleb128 0xc
-	.byte	0x0
-	.byte	0x0
-	.uleb128 0xc
+	.byte	0
+	.byte	0
+	.uleb128 0xe
 	.uleb128 0x35
-	.byte	0x0
+	.byte	0
 	.uleb128 0x49
 	.uleb128 0x13
-	.byte	0x0
-	.byte	0x0
-	.uleb128 0xd
+	.byte	0
+	.byte	0
+	.uleb128 0xf
 	.uleb128 0x34
-	.byte	0x0
+	.byte	0
 	.uleb128 0x3
-	.uleb128 0xe
+	.uleb128 0x8
 	.uleb128 0x3a
 	.uleb128 0xb
 	.uleb128 0x3b
@@ -1035,48 +999,13 @@ libsys_get_sysclk:
 	.uleb128 0xc
 	.uleb128 0x3c
 	.uleb128 0xc
-	.byte	0x0
-	.byte	0x0
-	.uleb128 0xe
-	.uleb128 0x1
-	.byte	0x1
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x1
-	.uleb128 0x13
-	.byte	0x0
-	.byte	0x0
-	.uleb128 0xf
-	.uleb128 0x21
-	.byte	0x0
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x2f
-	.uleb128 0xb
-	.byte	0x0
-	.byte	0x0
+	.byte	0
+	.byte	0
 	.uleb128 0x10
 	.uleb128 0x34
-	.byte	0x0
+	.byte	0
 	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x3f
-	.uleb128 0xc
-	.uleb128 0x3c
-	.uleb128 0xc
-	.byte	0x0
-	.byte	0x0
-	.uleb128 0x11
-	.uleb128 0x34
-	.byte	0x0
-	.uleb128 0x3
-	.uleb128 0xe
+	.uleb128 0x8
 	.uleb128 0x3a
 	.uleb128 0xb
 	.uleb128 0x3b
@@ -1087,48 +1016,25 @@ libsys_get_sysclk:
 	.uleb128 0xc
 	.uleb128 0x2
 	.uleb128 0xa
-	.byte	0x0
-	.byte	0x0
-	.byte	0x0
-	.section	.debug_pubnames,info
-	.4byte	0x31
-	.2byte	0x2
-	.4byte	.Ldebug_info0
-	.4byte	0x57c
-	.4byte	0x457
-	.ascii	"libsys_get_sysclk\000"
-	.4byte	0x569
-	.ascii	"_pllodiv\000"
-	.4byte	0x0
-	.section	.debug_pubtypes,info
-	.4byte	0x30
-	.2byte	0x2
-	.4byte	.Ldebug_info0
-	.4byte	0x57c
-	.4byte	0x390
-	.ascii	"__OSCCONbits_t\000"
-	.4byte	0x41a
-	.ascii	"__uint32_t\000"
-	.4byte	0x0
+	.byte	0
+	.byte	0
+	.byte	0
 	.section	.debug_aranges,info
 	.4byte	0x1c
 	.2byte	0x2
 	.4byte	.Ldebug_info0
 	.byte	0x4
-	.byte	0x0
-	.2byte	0x0
-	.2byte	0x0
+	.byte	0
+	.2byte	0
+	.2byte	0
 	.4byte	.Ltext0
 	.4byte	.Letext0-.Ltext0
-	.4byte	0x0
-	.4byte	0x0
+	.4byte	0
+	.4byte	0
+	.section	.debug_line,info
+.Ldebug_line0:
 	.section	.debug_str,info
-.LASF1:
-	.ascii	"OSCCONbits\000"
-.LASF0:
-	.ascii	"_pllodiv\000"
-	.section	.text,code
-	.ident	"GCC: (Microchip Technology) 4.5.2 MPLAB XC32 Compiler v1.34"
+	.ident	"GCC: (Microchip Technology) 4.8.3 MPLAB XC32 Compiler v1.40"
 # Begin MCHP vector dispatch table
 # End MCHP vector dispatch table
 # Microchip Technology PIC32 MCU configuration words

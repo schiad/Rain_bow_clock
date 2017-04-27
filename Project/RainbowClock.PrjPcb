@@ -88,23 +88,6 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [Document4]
-DocumentPath=CAMtastic1.Cam
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=-1
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=
-
-[Document5]
 DocumentPath=Schematics\Bluetooth.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -121,7 +104,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=TRSMJDFK
 
-[Document6]
+[Document5]
 DocumentPath=Schematics\BoardV2.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -138,7 +121,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=KITSWIVV
 
-[Document7]
+[Document6]
 DocumentPath=Schematics\LCD.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -155,7 +138,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=AEIGDRHI
 
-[Document8]
+[Document7]
 DocumentPath=Schematics\Neopixel.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -172,7 +155,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VLFQNTFM
 
-[Document9]
+[Document8]
 DocumentPath=Schematics\NeopixelArray.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -189,7 +172,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=JHLDVIAP
 
-[Document10]
+[Document9]
 DocumentPath=Schematics\Power.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -206,7 +189,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ITVNURNQ
 
-[Document11]
+[Document10]
 DocumentPath=Schematics\RainbowClock.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -223,7 +206,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FJHKEJWE
 
-[Document12]
+[Document11]
 DocumentPath=Schematics\Temperature.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -239,58 +222,6 @@ ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=IICUHHOO
-
-[GeneratedDocument1]
-DocumentPath=Project Outputs for RainbowClock\Bill of Materials.xls
-DItemRevisionGUID=
-
-[GeneratedDocument2]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.DRR
-DItemRevisionGUID=
-
-[GeneratedDocument3]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.EXTREP
-DItemRevisionGUID=
-
-[GeneratedDocument4]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.GBL
-DItemRevisionGUID=
-
-[GeneratedDocument5]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.GBS
-DItemRevisionGUID=
-
-[GeneratedDocument6]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.GM2
-DItemRevisionGUID=
-
-[GeneratedDocument7]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.GTL
-DItemRevisionGUID=
-
-[GeneratedDocument8]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.GTO
-DItemRevisionGUID=
-
-[GeneratedDocument9]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.GTS
-DItemRevisionGUID=
-
-[GeneratedDocument10]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.LDP
-DItemRevisionGUID=
-
-[GeneratedDocument11]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.REP
-DItemRevisionGUID=
-
-[GeneratedDocument12]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.RUL
-DItemRevisionGUID=
-
-[GeneratedDocument13]
-DocumentPath=Project Outputs for RainbowClock\PCB Gerbers\BoardV2.TXT
-DItemRevisionGUID=
 
 [Configuration1]
 Name=Default Configuration

@@ -2,8 +2,8 @@
 
 SCHEME color = {
     {5, 5, 5}, {30, 30, 70}, /* BG, MK */
-    {255, 0, 0}, {0, 255, 0},   /* HR, MN */
-    {0, 0, 255}                 /* SC     */
+    {220, 0, 0}, {0, 220, 0},   /* HR, MN */
+    {0, 0, 220}                 /* SC     */
 };
 
 static uint16_t sample_brightness(void)
@@ -71,13 +71,13 @@ static void      refresh_clock(void)
         color.bg.b + color.mn.b * date.seconds / 59);
     /* seconds --------------------------------- */
     libpixel_set(pixels, date.seconds,
-        color.bg.r + color.sc.r,
-        color.bg.g + color.sc.g,
-        color.bg.b + color.sc.b);
-//    libpixel_set(pixels, (date.seconds + 1) % 60,
-//        color.bg.r + color.sc.r * date.millis / 900,
-//        color.bg.g + color.sc.g * date.millis / 900,
-//        color.bg.b + color.sc.b * date.millis / 900);
+        color.bg.r + color.sc.r * (1000 - date.millis) / 1000,
+        color.bg.g + color.sc.g * (1000 - date.millis) / 1000,
+        color.bg.b + color.sc.b * (1000 - date.millis) / 1000);
+    libpixel_set(pixels, (date.seconds + 1) % 60,
+        color.bg.r + color.sc.r * date.millis / 1000,
+        color.bg.g + color.sc.g * date.millis / 1000,
+        color.bg.b + color.sc.b * date.millis / 1000);
     brightness = sample_brightness();
     libpixel_brightness(pixels, 255 * brightness / 1023);
     libpixel_show(pixels);
