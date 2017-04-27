@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>com.microchip.mplab.nbide.embedded.makeproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/make-project/1">
+            <name>RainbowClock</name>
+            <creation-uuid>08c54eca-3442-41fb-a3fa-ada8dfdb027f</creation-uuid>
+            <make-project-type>0</make-project-type>
+            <c-extensions>c</c-extensions>
+            <cpp-extensions/>
+            <header-extensions>h</header-extensions>
+            <asminc-extensions/>
+            <sourceEncoding>ISO-8859-1</sourceEncoding>
+            <make-dep-projects>
+                <make-dep-project>../libpixel.X</make-dep-project>
+                <make-dep-project>../liblcd.X</make-dep-project>
+                <make-dep-project>../libsys.X</make-dep-project>
+                <make-dep-project>../libuart.X</make-dep-project>
+            </make-dep-projects>
+        </data>
+    </configuration>
+</project>

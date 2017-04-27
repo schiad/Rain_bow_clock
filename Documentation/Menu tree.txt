@@ -1,0 +1,31 @@
+╚═MAIN═╗
+       ╠═ABOUT═══╗
+       ║         ╚═<plain template>
+       ║
+       ╠═ACTIONS═╗
+       ║         ╠═Toggle_LCD
+       ║         ╠═Crash_Clock
+       ║         ╠═Neopixel_Hello
+       ║         ╠═Reset_Clock
+       ║         ╚═Say_Hello
+       ║
+       ╠═HELP════╗
+       ║         ╠═Setting_the_time═╗
+       ║         ║                  ╚═<plain_template>
+       ║         ║
+       ║         ╠═Bluetooth_sync═══╗
+       ║         ║                  ╚═<plain_template>
+       ║         ║
+       ║         ╚═Changing_colors══╗
+       ║                            ╚═<plain_template>
+       ╠═COLORS══╗
+       ║         ╠═Background═══════╗
+       ║         ║                  ╚═<edit_template>
+       ║         ║
+       ║         ╠═Foreground═══════╗
+       ║         ║                  ╚═<edit_template>
+       ║         ║
+       ║         ╚═Markers══════════╗
+       ║                            ╚═<edit_template>
+       ╚═TIME════╗
+                 ╚═<edit_template>

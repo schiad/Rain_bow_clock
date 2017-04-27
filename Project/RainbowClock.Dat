@@ -1,0 +1,27 @@
+Field=Comment~String~Comment~151|Field=Description~String~Description~211|Field=Footprint~String~Footprint~134|Field=Quantity~Integer~Quantity~35|Field=Fabricant~String~Fabricant~77|Field=Fournisseur~String~Fournisseur~70|Field=RefFabricant~String~RefFabricant~84|Field=RefFournisseur~String~RefFournisseur~83|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~RainbowClock.PrjPcb|ReportField=ProjectFullPath~C:\Users\bocal\Desktop\vchesnea\RainbowClock\Project\RainbowClock.PrjPcb|ReportField=Title~Bill of Materials For Project [RainbowClock.PrjPcb] (No PCB Document Selected)|ReportField=TotalQuantity~157|ReportField=ReportTime~5:40:50 PM|ReportField=ReportDate~5/13/2016|ReportField=ReportDateTime~5/13/2016 5:40:50 PM|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~- schiad|ReportField=Address3~- vchesnea|ReportField=Address4~|ReportField=Application_BuildNumber~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~5/13/2016|ReportField=CurrentTime~5:24:54 PM|ReportField=Date~|ReportField=DocumentFullPathAndName~C:\Users\bocal\Desktop\vchesnea\RainbowClock\Project\Shematics\RainbowClock.SchDoc|ReportField=DocumentName~RainbowClock.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~vchesnea|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~5/13/2016|ReportField=Organization~In alphabetical order:|ReportField=ProjectName~RainbowClock.PrjPcb|ReportField=Revision~A|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~Rainbow Clock Project|ReportField=DataSourceFileName~RainbowClock.PrjPcb|ReportField=DataSourceFullPath~C:\Users\bocal\Desktop\vchesnea\RainbowClock\Project\RainbowClock.PrjPcb|ReportField=PCBDataSourceFileName~Board.PcbDoc|ReportField=PCBDataSourceFullPath~C:\Users\bocal\Desktop\vchesnea\RainbowClock\Project\Shematics\Board.PcbDoc
+0.47uF|Capacitor (Semiconductor SIM Model)|CAP0603|1||||
+1-215876-3|Tyco 1-215876-3||1|Tyco|Farnell|1-215876-3|1773039
+10R|Resistor|RES0603|1||||
+10uF|Capacitor|CAP0603|1||||
+1uF|Capacitor|CAP0603|1||||
+22uF|Capacitor (Semiconductor SIM Model)|CAP0603|1||||
+32kHz XTAL|Crystal Oscillator|NCL38LF|1|Fox Electronics|Farnell|NC38LF-327|2064058
+8MHz XTAL|Crystal Oscillator|FOXSLF/080-20|1|Fox Electronics|Farnell|FOXSLF/080-20|2057960
+BMP280|Temp. sensor||1|BOSCH||BMP280|
+EC11B152420G-STEC11B01|Rotary encoder|EC11B152420G-STEC11B01|1|ALPS|Farnell|EC11B152420G-STEC11B01|1191733
+HC-06|Bluetooth||1|Wavesen||HC-06|
+Header 16|Header, 16-Pin|MC42004A6W-BNMLW|1|SAMTEC|Farnell|CES-116-01-T-S|1667522
+LDR|Photoresistor|VT935G|1|Excelitas Tech|Farnell|VT935G|1652638
+MC42003A6W-BNMLW|LCD|MC42004A6W-BNMLW|1|MIDAS|Farnell|MC42004A6W-BNMLW|2063162
+PIC32MX110F016D-I/PT|Microcontroller|PIC32MX110F016H-I/PT|1|Microchip|Farnell|PIC32MX110F016D-I/PT|2057068
+PWR2.5|Low Voltage Power Supply Connector|MJ-179PH|1|MULTICOMP|Farnell|MJ-179PH|1737246
+TS2940CP-3.3 C5|Voltage Regulator|TS2940CP-3.3 C5|1|TAIWAN SEMICONDUCTOR|Farnell|TS2940CP-3.3 C5|7261390
+15pF|Capacitor|CAP0603|2||||
+30pF|Capacitor|CAP0603|2||||
+3306P-1-203|Trimpot|3306P-1-202|2|Bourns|Farnell|3306P-1-203|108240
+Header 6|Header, 6-Pin|Header 6|2|MULTICOMP|Farnell|2212S-06SG-85|1593462
+SW-PB|Switch|1-1825027-4|2|TE Connectivity|Farnell|1-1825027-4|2468742
+4.7K|Resistor|RES0603|3||||
+1K|Resistor|RES0603|4||||
+WS2012B|Neopixel|WS2812b|60|WorldSemi||WS2812b|
+100nF|Capacitor|CAP0603|63||||
